@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Camera Hair Capture</title>
+    <meta content="N" name="author">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="main.css" rel="stylesheet" type="text/css">
+    <script src="shared/shim.js"></script>
+  </head>
+
+  <body>
+    <script src="main2.js"></script>
+	<video id="video" width="960" height="720"></video>
+			
+	<div id="wrap_video">
+
+	<div id="video_box">
+		<div>
+			<iframe id="video_frame" width="980" height="740"></iframe>
+		</div>
+		
+		<div id="video_overlays"><img id="headimg" src="front_cam_2.png" alt="front" width="540" height="720"></div>
+
+	
+	<button id='btn_back' onClick='change_image_back()'>left</button>
+	<button id="snap">Snap Photo</button>
+	<button id='btn_next' onClick='change_image()'>right</button>
+	<button id="btn_frame" onClick='change_frame()'>frame change</button>
+	<button id="btn_camera" onClick='change_camera()'>camera change</button>
+
+	</div>
+		
+	</div>
+	<p id="pngHolder"></p>
+	<canvas id="canvas"></canvas>
+
+	<script>
+			
+	  var myImages = ['front_cam_2.png','front_left_cam_2.png',
+	  'side_left_cam_2.png','back_left_cam_2.png','back_cam_2.png',
+	  'back_right_cam_2.png','side_right_cam_2.png','front_right_cam_2.png'];
+
+
+	  var img_index = 0;
+	  var frame_width = ['960','540'];
+	  var frame_height = ['720','720'];
+	  var frame_left = ["210px","10px"];
+	  var box_width = ["980px","560px"];
+	  var frame_index = 0;
+
+		function change_image() {
+		    
+		    //here "this" will point to button, the element which is clicked ie event occurred.
+		    
+		    //but we need image, so get it by using below statement
+		    var img = document.getElementById("headimg");
+		    img_index = ++img_index % 8; //replace 2 with number of images
+		    img.src = myImages[img_index];
+		}
+		function change_image_back() {
+		    
+		    //here "this" will point to button, the element which is clicked ie event occurred.
+		    
+		    //but we need image, so get it by using below statement
+		    var img = document.getElementById("headimg");
+		    img_index = (--img_index+8) % 8; //replace 2 with number of images
+		    img.src = myImages[img_index];
+		}
+		function change_frame() {
+		    
+		    //here "this" will point to button, the element which is clicked ie event occurred.
+		    
+		    //but we need image, so get it by using below statement
+		    var vid = document.getElementById("video");
+		    frame_index = ++frame_index % 2;
+		    vid.width = frame_width[frame_index];
+		    vid.height = frame_height[frame_index];
+		    var img_frame = document.getElementById("video_overlays");
+		    img_frame.style.left = frame_left[frame_index];
+			var vid_frame = document.getElementById("video_frame");
+		    vid_frame.width = box_width[frame_index];
+		}
+
+	</script>
+
+  </body>
+</html>
