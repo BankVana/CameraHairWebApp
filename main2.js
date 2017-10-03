@@ -46,7 +46,7 @@ var constraints_list = ['environment','user'];
             if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 				var constraints = {
 					advanced: [{
-						facingMode: 'environment'
+						facingMode: {exact : 'environment'}
 					}]
 				};
 				navigator.mediaDevices
