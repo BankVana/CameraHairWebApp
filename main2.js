@@ -65,12 +65,15 @@ var constraints_list = ['environment','user'];
 				navigator.mediaDevices.enumerateDevices().then(
 					function(devices) {
 						let sourceId = null;
+						var id_test = 0;
 						// enumerate all devices
 						for (var device of devices) {
 						 // if there is still no video input, or if this is the rear camera
-						 if (device.kind == 'videoinput' &&
-						   (!sourceId || device.label.indexOf('back') !== -1)) {
-						   sourceId = device.deviceId;
+						 if (device.kind == 'videoinput')// &&
+						   //(!sourceId || device.label.indexOf('back') !== -1)) 
+						   {
+						   if(id_test == constraints_ind){sourceId = device.deviceId;}
+						   ++id_test;
 						 }
 						}
 						// we didn't find any video input
