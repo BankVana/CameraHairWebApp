@@ -20,7 +20,7 @@ var constraints_list = ['environment','user'];
 				 || navigator.userAgent.match(/iPod/i)
 				 || navigator.userAgent.match(/BlackBerry/i)
 				 || navigator.userAgent.match(/Windows Phone/i)
-				 ) && n/Android.+Firefox\//.test(navigator.userAgent)
+				 ) && /Android.+Firefox\//.test(navigator.userAgent)
 				 ){
 					return true;
 				  }
