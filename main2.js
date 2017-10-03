@@ -67,7 +67,9 @@ var constraints_list = ['environment','user'];
 						facingMode: constraints_list[constraints_ind]
 					}]
 				};
-				navigator.getUserMedia(mediaConfig, function(localMediaStream) {
+				navigator.getUserMedia(video: {
+						facingMode: {exact : 'environment'}
+					}, function(localMediaStream) {
 					video.src = window.URL.createObjectURL(localMediaStream);
 					video.play();
 				}, errBack);
