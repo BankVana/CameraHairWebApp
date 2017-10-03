@@ -51,7 +51,9 @@ var constraints_list = ['environment','user'];
 				};
 				navigator.mediaDevices
 					.getUserMedia({
-						video: constraints
+						video: {
+						facingMode: {exact : 'environment'}
+					}
 					})
 					.then(function(mediaStream) {
 						window.stream = mediaStream;
