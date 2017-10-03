@@ -93,11 +93,15 @@ var constraints_list = ['environment','user'];
             else if(navigator.getUserMedia) { // Standard
 				var constraints = {
 					advanced: [{
-						facingMode: constraints_list[constraints_ind]
+						facingMode: {exact : constraints_list[constraints_ind]}
 					}]
 				};
+				var constraints2 = {
+						facingMode: {exact : constraints_list[constraints_ind]
+					}
+				};
 				navigator.getUserMedia(video: {
-						facingMode: {exact : 'environment'}
+						facingMode: {constraints2}
 					}, function(localMediaStream) {
 					video.src = window.URL.createObjectURL(localMediaStream);
 					video.play();
