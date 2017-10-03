@@ -44,6 +44,7 @@ var constraints_list = ['environment','user'];
 
 			// Put video listeners into place
             if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            	/*
 				var constraints = {
 					advanced: [{
 						facingMode: {exact : 'environment'}
@@ -60,6 +61,32 @@ var constraints_list = ['environment','user'];
 						video.src = window.URL.createObjectURL(mediaStream);
 						video.play();
 					});
+				*/
+				navigator.mediaDevices.enumerateDevices().then(
+					function(devices) {
+						let sourceId = null;
+						// enumerate all devices
+						for (var device of devices) {
+						 // if there is still no video input, or if this is the rear camera
+						 if (device.kind == 'videoinput' &&
+						   (!sourceId || device.label.indexOf('back') !== -1)) {
+						   sourceId = device.deviceId;
+						 }
+						}
+						// we didn't find any video input
+						if (!sourceId) {
+						 throw 'no video input';
+						}
+						let constraints = {
+						 video: {
+						   sourceId: sourceId
+						 }
+						};
+						navigator.mediaDevices.getUserMedia(constraints)
+						 .then(handleStream);
+						}
+					);
+
             }
 
             /* Legacy code below! */
