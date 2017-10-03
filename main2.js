@@ -20,11 +20,7 @@ var constraints_list = ['environment','user'];
 				 || navigator.userAgent.match(/iPod/i)
 				 || navigator.userAgent.match(/BlackBerry/i)
 				 || navigator.userAgent.match(/Windows Phone/i)
-<<<<<<< HEAD
-				 ) && /Android.+Firefox\//.test(navigator.userAgent)
-=======
-				 ) && navigator.mozGetUserMedia
->>>>>>> parent of 96b3954... firefox android check(2)
+				 ) && navigator.userAgent.toLowerCase().indexOf('fennec') > -1
 				 ){
 					return true;
 				  }
