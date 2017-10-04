@@ -85,12 +85,12 @@ var constraints_list = ['environment','user'];
 				canvas.width = video.width;
 				canvas.height = video.height;
 				if(detectmob()){//} && navigator.userAgent.toLowerCase().indexOf('firefox') >= 0){
-					flipHorizontally(video, 0, 0);
+					//flipHorizontally(video, 0, 0);
 					//move to x + img.width
-					//canvas.getContext('2d').translate(0, video.height);
+					canvas.getContext('2d').translate(0, video.height);
 				
 					//scale x by -1; this trick flips horizontally
-					//canvas.getContext('2d').scale(1,-1);
+					canvas.getContext('2d').scale(1,-1);
 				}
 				canvas.getContext("2d").drawImage(video, 0, 0, canvas.width, canvas.height);
 				var pngList = document.getElementById("pngHolder");
@@ -106,7 +106,7 @@ var constraints_list = ['environment','user'];
 				image.src = canvas.toDataURL("image/png");
 				return image;
 			}
-
+			/*
 			function flipHorizontally(img,x,y) {
 				//move to x + img.width
 				canvas.getContext('2d').translate(x+img.width, y);
@@ -115,6 +115,7 @@ var constraints_list = ['environment','user'];
 				canvas.getContext('2d').scale(-1, 1);
 				
 			}
+			*/
 		}, false);
 		
 		function change_camera() {
