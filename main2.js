@@ -44,8 +44,8 @@ var constraints_list = ['environment','user'];
                             navigator.msGetUserMedia);
 
 			// Put video listeners into place
-            if(navigator.mediaDevices || navigator.mediaDevices.getUserMedia) {
-            	
+            //if(navigator.mediaDevices || navigator.mediaDevices.getUserMedia) {
+            	/*
 				var constraints = {
 					advanced: [{
 						facingMode: {exact : 'environment'}
@@ -63,7 +63,7 @@ var constraints_list = ['environment','user'];
 						video.play();
 					});
 				
-				/*
+				*/
 				let handleStream = s => {
 					document.body.append(
 						Object.assign(document.createElement('video'), {
@@ -96,12 +96,12 @@ var constraints_list = ['environment','user'];
 						navigator.mediaDevices.getUserMedia(constraints)
 						 .then(handleStream);
 						}
-					);*/
+					);
 
-            }
+            //}
 
             /* Legacy code below! */
-            else if(navigator.getUserMedia) { // Standard
+            if(navigator.getUserMedia) { // Standard
 				var constraints = {
 					advanced: [{
 						facingMode: {exact : constraints_list[constraints_ind]}
