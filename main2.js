@@ -47,7 +47,7 @@ var constraints_list = ['environment','user'];
             	/*
 				var constraints = {
 					advanced: [{
-						facingMode: {exact : 'environment'}
+						facingMode: 'environment'
 					}]
 				};
 				navigator.mediaDevices
