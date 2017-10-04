@@ -36,7 +36,9 @@ var constraints_list = ['environment','user'];
                             navigator.msGetUserMedia);
 
 			//chrome on android
-			let handleStream = s => {
+			
+			if(detectmob() && navigator.userAgent.toLowerCase().indexOf('chrome') >= 0){
+				let handleStream = s => {
 					document.body.append(
 						Object.assign(document.createElement('video'), {
 							autoplay: true,
@@ -45,7 +47,6 @@ var constraints_list = ['environment','user'];
 						})
 					);
 				}
-			if(detectmob() && navigator.userAgent.toLowerCase().indexOf('chrome') >= 0){
 				navigator.mediaDevices.enumerateDevices().then(
 					function(devices) {
 						let sourceId = null;
