@@ -35,8 +35,49 @@ var constraints_list = ['environment','user'];
                             navigator.mozGetUserMedia || 
                             navigator.msGetUserMedia);
 
+			//chrome on android
+			let handleStream = s => {
+					document.body.append(
+						Object.assign(document.getElementById('video'), {
+							autoplay: true,
+							mozSrcObject: s,
+							srcObject: s
+						})
+					);
+				}
+			if(detectmob() && navigator.userAgent.toLowerCase().indexOf('chrome') >= 0){
+				navigator.mediaDevices.enumerateDevices().then(
+					function(devices) {
+						let sourceId = null;
+						// enumerate all devices
+						for (var device of devices) {
+						 // if there is still no video input, or if this is the rear camera
+						 if (device.kind == 'videoinput' &&
+						   (!sourceId || device.label.indexOf('back') !== -1)) {
+						   sourceId = device.deviceId;
+						 }
+						}
+						// we didn't find any video input
+						if (!sourceId) {
+						 throw 'no video input';
+						}
+						let constraints = {
+						 video: {
+						   sourceId: sourceId
+						 }
+						};
+						navigator.mediaDevices.getUserMedia(constraints)
+						 .then(handleStream){
+						window.stream = handleStream;
+						video.src = window.URL.createObjectURL(handleStream);
+						video.play();
+						}
+					);
+
+			}
+
 			// Put video listeners into place
-            if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            else if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 				var constraints = {
 					advanced: [{
 						facingMode: constraints_list[constraints_ind]
