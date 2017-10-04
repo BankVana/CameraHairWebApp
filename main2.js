@@ -84,7 +84,7 @@ var constraints_list = ['environment','user'];
 				var canvas = document.createElement("canvas");
 				canvas.width = video.width;
 				canvas.height = video.height;
-				if(detectmob()){//} && navigator.userAgent.toLowerCase().indexOf('firefox') >= 0){
+				if(detectmob() && navigator.userAgent.toLowerCase().indexOf('firefox') >= 0){//} && navigator.userAgent.toLowerCase().indexOf('firefox') >= 0){
 					//flipHorizontally(video, 0, 0);
 					//move to x + img.width
 					canvas.getContext('2d').translate(0, video.height);
