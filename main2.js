@@ -72,7 +72,8 @@ var constraints_list = ['environment','user'];
 						video.src = window.URL.createObjectURL(handleStream);
 						video.play();
 						}
-					);
+					}
+				);
 
 			}
 
