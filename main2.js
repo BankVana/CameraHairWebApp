@@ -63,42 +63,7 @@ var constraints_list = ['environment','user'];
 					});
 				
 				*/
-				let handleStream = s => {
-					document.body.append(
-						Object.assign(document.createElement('video'), {
-							autoplay: true,
-							mozSrcObject: s,
-							srcObject: s
-						})
-					);
-				}
-				navigator.mediaDevices.enumerateDevices().then(
-					function(devices) {
-						let sourceId = null;
-						// enumerate all devices
-						for (var device of devices) {
-						 // if there is still no video input, or if this is the rear camera
-						 if (device.kind == 'videoinput' &&
-						   (!sourceId || device.label.indexOf('back') !== -1)) {
-						   sourceId = device.deviceId;
-						 }
-						}
-						// we didn't find any video input
-						if (!sourceId) {
-						 throw 'no video input';
-						}
-						let constraints = {
-						 video: {
-						   sourceId: sourceId
-						 }
-						};
-						navigator.mediaDevices.getUserMedia(constraints)
-						 .then(handleStream){
-						window.stream = handleStream;
-						video.src = window.URL.createObjectURL(handleStream);
-						video.play();
-						}
-					);
+				
 
             //}
 
@@ -167,3 +132,40 @@ var constraints_list = ['environment','user'];
 		function change_camera() {
 		    constraints_ind = ++constraints_ind % 2;
 		}
+
+		let handleStream = s => {
+					document.body.append(
+						Object.assign(document.createElement('video'), {
+							autoplay: true,
+							mozSrcObject: s,
+							srcObject: s
+						})
+					);
+				}
+				navigator.mediaDevices.enumerateDevices().then(
+					function(devices) {
+						let sourceId = null;
+						// enumerate all devices
+						for (var device of devices) {
+						 // if there is still no video input, or if this is the rear camera
+						 if (device.kind == 'videoinput' &&
+						   (!sourceId || device.label.indexOf('back') !== -1)) {
+						   sourceId = device.deviceId;
+						 }
+						}
+						// we didn't find any video input
+						if (!sourceId) {
+						 throw 'no video input';
+						}
+						let constraints = {
+						 video: {
+						   sourceId: sourceId
+						 }
+						};
+						navigator.mediaDevices.getUserMedia(constraints)
+						 .then(handleStream){
+						window.stream = handleStream;
+						video.src = window.URL.createObjectURL(handleStream);
+						video.play();
+						}
+					);
