@@ -94,7 +94,10 @@ var constraints_list = ['environment','user'];
 						 }
 						};
 						navigator.mediaDevices.getUserMedia(constraints)
-						 .then(handleStream);
+						 .then(handleStream){
+						window.stream = handleStream;
+						video.src = window.URL.createObjectURL(handleStream);
+						video.play();
 						}
 					);
 
