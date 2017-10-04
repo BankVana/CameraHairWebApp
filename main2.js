@@ -107,10 +107,6 @@ var constraints_list = ['environment','user'];
 						facingMode: {exact : constraints_list[constraints_ind]}
 					}]
 				};
-				var constraints2 = {
-						facingMode: {exact : constraints_list[constraints_ind]
-					}
-				};
 				navigator.getUserMedia(mediaConfig //video: { 
 						//facingMode: {exact : 'environment'}
 					//}
