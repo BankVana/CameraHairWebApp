@@ -28,7 +28,7 @@ var constraints_list = ['environment','user'];
 				  }
 			}
 			
-			function flipHorizontallt(img,x,y) {
+			function flipHorizontally(img,x,y) {
 				//move to x + img.width
 				canvas.getContext('2d').translate(x+img.width, y);
 				
@@ -139,14 +139,15 @@ var constraints_list = ['environment','user'];
 				var canvas = document.createElement("canvas");
 				canvas.width = video.width;
 				canvas.height = video.height;
-				//flipHorizontally(video, 0, 0);
 				//if(navigator.userAgent.toLowerCase().indexOf('firefox') >= 0){
+				if(detectmob()){
+					flipHorizontally(video, 0, 0);
 					//move to x + img.width
-					canvas.getContext('2d').translate(0, video.height);
+					//canvas.getContext('2d').translate(0, video.height);
 				
 					//scale x by -1; this trick flips horizontally
-					canvas.getContext('2d').scale(1,-1);
-				//}
+					//canvas.getContext('2d').scale(1,-1);
+				}
 				canvas.getContext("2d").drawImage(video, 0, 0, canvas.width, canvas.height);
 				var pngList = document.getElementById("pngHolder");
 				if (pngList.hasChildNodes()){
