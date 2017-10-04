@@ -1,21 +1,6 @@
 var constraints_ind = 0;
 var constraints_list = ['environment','user'];
 
-function detectmob() { 
-	 if( navigator.userAgent.match(/Android/i)
-	 || navigator.userAgent.match(/webOS/i)
-	 || navigator.userAgent.match(/iPhone/i)
-	 || navigator.userAgent.match(/iPad/i)
-	 || navigator.userAgent.match(/iPod/i)
-	 || navigator.userAgent.match(/BlackBerry/i)
-	 || navigator.userAgent.match(/Windows Phone/i)
-	 ){
-		return true;
-	  }
-	 else {
-		return false;
-	  }
-}
 
 // Put event listeners into place
 		window.addEventListener("DOMContentLoaded", function() {
@@ -27,6 +12,23 @@ function detectmob() {
             var errBack = function(e) {
             	console.log('An error has occurred!', e)
             };
+
+            function detectmob() { 
+				 if( navigator.userAgent.match(/Android/i)
+				 || navigator.userAgent.match(/webOS/i)
+				 || navigator.userAgent.match(/iPhone/i)
+				 || navigator.userAgent.match(/iPad/i)
+				 || navigator.userAgent.match(/iPod/i)
+				 || navigator.userAgent.match(/BlackBerry/i)
+				 || navigator.userAgent.match(/Windows Phone/i)
+				 ){
+					return true;
+				  }
+				 else {
+					return false;
+				  }
+			}
+
 			
 			navigator.getUserMedia = (navigator.getUserMedia ||
                             navigator.webkitGetUserMedia ||
@@ -82,7 +84,7 @@ function detectmob() {
 				var canvas = document.createElement("canvas");
 				canvas.width = video.width;
 				canvas.height = video.height;
-				if(detectmob() && navigator.userAgent.toLowerCase().indexOf('firefox') >= 0){
+				if(detectmob()){//} && navigator.userAgent.toLowerCase().indexOf('firefox') >= 0){
 					flipHorizontally(video, 0, 0);
 					//move to x + img.width
 					//canvas.getContext('2d').translate(0, video.height);
