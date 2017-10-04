@@ -110,9 +110,10 @@ var constraints_list = ['environment','user'];
 						facingMode: {exact : constraints_list[constraints_ind]
 					}
 				};
-				navigator.getUserMedia(video: {
-						facingMode: {exact : 'environment'}
-					}, function(localMediaStream) {
+				navigator.getUserMedia(mediaConfig //video: { 
+						//facingMode: {exact : 'environment'}
+					//}
+					, function(localMediaStream) {
 					video.src = window.URL.createObjectURL(localMediaStream);
 					video.play();
 				}, errBack);
