@@ -12,30 +12,6 @@ var constraints_list = ['environment','user'];
             	console.log('An error has occurred!', e)
             };
 			
-			function detectmob() { 
-				 if( (navigator.userAgent.match(/Android/i)
-				 || navigator.userAgent.match(/webOS/i)
-				 || navigator.userAgent.match(/iPhone/i)
-				 || navigator.userAgent.match(/iPad/i)
-				 || navigator.userAgent.match(/iPod/i)
-				 || navigator.userAgent.match(/BlackBerry/i)
-				 || navigator.userAgent.match(/Windows Phone/i)
-				 ) && navigator.userAgent.toLowerCase().indexOf('firefox') >= 0
-				 ){
-					return true;
-				  }
-				 else {
-					return false;
-				  }
-			}
-			
-			function flipHorizontallt(img,x,y) {
-				//move to x + img.width
-				canvas.getContext('2d').translate(x+img.width, y);
-				
-				//scale x by -1; this trick flips horizontally
-				canvas.getContext('2d').scale(-1, 1);
-				
 			}
 			
 			navigator.getUserMedia = (navigator.getUserMedia ||
@@ -168,3 +144,29 @@ var constraints_list = ['environment','user'];
 		function change_camera() {
 		    constraints_ind = ++constraints_ind % 2;
 		}
+
+		
+			function detectmob() { 
+				 if( (navigator.userAgent.match(/Android/i)
+				 || navigator.userAgent.match(/webOS/i)
+				 || navigator.userAgent.match(/iPhone/i)
+				 || navigator.userAgent.match(/iPad/i)
+				 || navigator.userAgent.match(/iPod/i)
+				 || navigator.userAgent.match(/BlackBerry/i)
+				 || navigator.userAgent.match(/Windows Phone/i)
+				 ) && navigator.userAgent.toLowerCase().indexOf('firefox') >= 0
+				 ){
+					return true;
+				  }
+				 else {
+					return false;
+				  }
+			}
+			
+			function flipHorizontallt(img,x,y) {
+				//move to x + img.width
+				canvas.getContext('2d').translate(x+img.width, y);
+				
+				//scale x by -1; this trick flips horizontally
+				canvas.getContext('2d').scale(-1, 1);
+				
