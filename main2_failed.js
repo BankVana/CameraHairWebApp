@@ -1,22 +1,6 @@
 var constraints_ind = 0;
 var constraints_list = ['environment','user'];
 
-function detectmob() { 
-	 if( navigator.userAgent.match(/Android/i)
-	 || navigator.userAgent.match(/webOS/i)
-	 || navigator.userAgent.match(/iPhone/i)
-	 || navigator.userAgent.match(/iPad/i)
-	 || navigator.userAgent.match(/iPod/i)
-	 || navigator.userAgent.match(/BlackBerry/i)
-	 || navigator.userAgent.match(/Windows Phone/i)
-	 ){
-		return true;
-	  }
-	 else {
-		return false;
-	  }
-}
-
 // Put event listeners into place
 		window.addEventListener("DOMContentLoaded", function() {
 			// Grab elements, create settings, etc.
@@ -28,37 +12,109 @@ function detectmob() {
             	console.log('An error has occurred!', e)
             };
 			
+			function detectmob() { 
+				 if( navigator.userAgent.match(/Android/i)
+				 || navigator.userAgent.match(/webOS/i)
+				 || navigator.userAgent.match(/iPhone/i)
+				 || navigator.userAgent.match(/iPad/i)
+				 || navigator.userAgent.match(/iPod/i)
+				 || navigator.userAgent.match(/BlackBerry/i)
+				 || navigator.userAgent.match(/Windows Phone/i)
+				 ){
+					return true;
+				  }
+				 else {
+					return false;
+				  }
+			}
+			
+			function flipHorizontally(img,x,y) {
+				//move to x + img.width
+				canvas.getContext('2d').translate(x+img.width, y);
+				
+				//scale x by -1; this trick flips horizontally
+				canvas.getContext('2d').scale(-1, 1);
+				
+			}
+			/*
 			navigator.getUserMedia = (navigator.getUserMedia ||
                             navigator.webkitGetUserMedia ||
                             navigator.mozGetUserMedia || 
-                            navigator.msGetUserMedia);
+                            navigator.msGetUserMedia);*/
 
 			// Put video listeners into place
-            if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            //if(navigator.mediaDevices || navigator.mediaDevices.getUserMedia) {
+            	/*
 				var constraints = {
 					advanced: [{
-						facingMode: constraints_list[constraints_ind]
+						facingMode: 'environment'
 					}]
 				};
 				navigator.mediaDevices
 					.getUserMedia({
-						video: constraints
+						video: {
+						facingMode: {exact : 'environment'}
+					}
 					})
 					.then(function(mediaStream) {
 						window.stream = mediaStream;
 						video.src = window.URL.createObjectURL(mediaStream);
 						video.play();
 					});
-            }
+				
+				*/
+				/*
+				let handleStream = s => {
+					document.body.append(
+						Object.assign(document.createElement('video'), {
+							autoplay: true,
+							mozSrcObject: s,
+							srcObject: s
+						})
+					);
+				}
+				*/
+				navigator.mediaDevices.enumerateDevices().then(
+					function(devices) {
+						let sourceId = null;
+						// enumerate all devices
+						for (var device of devices) {
+						 // if there is still no video input, or if this is the rear camera
+						 if (device.kind == 'videoinput' &&
+						   (!sourceId || device.label.indexOf('back') !== -1)) {
+						   sourceId = device.deviceId;
+						 }
+						}
+						// we didn't find any video input
+						if (!sourceId) {
+						 throw 'no video input';
+						}
+						let constraints = {
+						 video: {
+						   sourceId: sourceId
+						 }
+						};
+						navigator.mediaDevices.getUserMedia(constraints)
+						 .then(mediaStream){
+						window.stream = mediaStream;
+						video.src = window.URL.createObjectURL(mediaStream);
+						video.play();
+						}
+					);
 
-            /* Legacy code below! */
-            else if(navigator.getUserMedia) { // Standard
+            //}
+
+            /* Legacy code below! 
+            if(navigator.getUserMedia) { // Standard
 				var constraints = {
 					advanced: [{
-						facingMode: constraints_list[constraints_ind]
+						facingMode: {exact : constraints_list[constraints_ind]}
 					}]
 				};
-				navigator.getUserMedia(mediaConfig, function(localMediaStream) {
+				navigator.getUserMedia(mediaConfig //video: { 
+						//facingMode: {exact : 'environment'}
+					//}
+					, function(localMediaStream) {
 					video.src = window.URL.createObjectURL(localMediaStream);
 					video.play();
 				}, errBack);
@@ -76,13 +132,15 @@ function detectmob() {
 			else {
 				alert('Sorry, your browser does not support getUserMedia');
 			}
+			*/
 
 			// Trigger photo take
 			document.getElementById('snap').addEventListener('click', function() {
 				var canvas = document.createElement("canvas");
 				canvas.width = video.width;
 				canvas.height = video.height;
-				if(detectmob() && navigator.userAgent.toLowerCase().indexOf('firefox') >= 0){
+				//if(navigator.userAgent.toLowerCase().indexOf('firefox') >= 0){
+				if(detectmob()){
 					flipHorizontally(video, 0, 0);
 					//move to x + img.width
 					//canvas.getContext('2d').translate(0, video.height);
@@ -96,6 +154,9 @@ function detectmob() {
 					pngList.removeChild(pngList.firstChild);
 				}
 				document.getElementById("pngHolder").appendChild(convertCanvasToImage(canvas));
+				
+				//always clean up - reset transformation to default
+				canvas.getContext('2d').setTransform(1,0,0,1,0,0);
 			});
 			
 			// Converts canvas to an image
@@ -103,15 +164,6 @@ function detectmob() {
 				var image = new Image();
 				image.src = canvas.toDataURL("image/png");
 				return image;
-			}
-
-			function flipHorizontally(img,x,y) {
-				//move to x + img.width
-				canvas.getContext('2d').translate(x+img.width, y);
-				
-				//scale x by -1; this trick flips horizontally
-				canvas.getContext('2d').scale(-1, 1);
-				
 			}
 		}, false);
 		
