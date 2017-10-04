@@ -38,7 +38,7 @@ var constraints_list = ['environment','user'];
 			//chrome on android
 			let handleStream = s => {
 					document.body.append(
-						Object.assign(document.getElementById('video'), {
+						Object.assign(document.createElement('video'), {
 							autoplay: true,
 							mozSrcObject: s,
 							srcObject: s
