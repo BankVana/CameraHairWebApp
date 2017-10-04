@@ -100,7 +100,7 @@ var constraints_list = ['environment','user'];
 
             //}
 
-            /* Legacy code below! */
+            /* Legacy code below! 
             if(navigator.getUserMedia) { // Standard
 				var constraints = {
 					advanced: [{
@@ -128,6 +128,7 @@ var constraints_list = ['environment','user'];
 			else {
 				alert('Sorry, your browser does not support getUserMedia');
 			}
+			*/
 
 			// Trigger photo take
 			document.getElementById('snap').addEventListener('click', function() {
