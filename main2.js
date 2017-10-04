@@ -13,14 +13,14 @@ var constraints_list = ['environment','user'];
             };
 			
 			function detectmob() { 
-				 if( (navigator.userAgent.match(/Android/i)
+				 if( navigator.userAgent.match(/Android/i)
 				 || navigator.userAgent.match(/webOS/i)
 				 || navigator.userAgent.match(/iPhone/i)
 				 || navigator.userAgent.match(/iPad/i)
 				 || navigator.userAgent.match(/iPod/i)
 				 || navigator.userAgent.match(/BlackBerry/i)
 				 || navigator.userAgent.match(/Windows Phone/i)
-				 ) && navigator.userAgent.toLowerCase().indexOf('fennec') > -1
+				 
 				 ){
 					return true;
 				  }
@@ -64,13 +64,13 @@ var constraints_list = ['environment','user'];
 					});
 				*/
 				let handleStream = s => {
-				document.body.append(
-					Object.assign(document.createElement('video'), {
-						autoplay: true,
-						mozSrcObject: s,
-						srcObject: s
-					})
-				);
+					document.body.append(
+						Object.assign(document.createElement('video'), {
+							autoplay: true,
+							mozSrcObject: s,
+							srcObject: s
+						})
+					);
 				}
 				navigator.mediaDevices.enumerateDevices().then(
 					function(devices) {
