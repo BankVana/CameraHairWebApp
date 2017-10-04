@@ -45,7 +45,7 @@ var constraints_list = ['environment','user'];
 
 			// Put video listeners into place
             if(navigator.mediaDevices || navigator.mediaDevices.getUserMedia) {
-            	/*
+            	
 				var constraints = {
 					advanced: [{
 						facingMode: {exact : 'environment'}
@@ -62,7 +62,8 @@ var constraints_list = ['environment','user'];
 						video.src = window.URL.createObjectURL(mediaStream);
 						video.play();
 					});
-				*/
+				
+				/*
 				let handleStream = s => {
 					document.body.append(
 						Object.assign(document.createElement('video'), {
@@ -95,7 +96,7 @@ var constraints_list = ['environment','user'];
 						navigator.mediaDevices.getUserMedia(constraints)
 						 .then(handleStream);
 						}
-					);
+					);*/
 
             }
 
