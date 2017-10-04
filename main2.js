@@ -36,11 +36,11 @@ var constraints_list = ['environment','user'];
 				canvas.getContext('2d').scale(-1, 1);
 				
 			}
-			
+			/*
 			navigator.getUserMedia = (navigator.getUserMedia ||
                             navigator.webkitGetUserMedia ||
                             navigator.mozGetUserMedia || 
-                            navigator.msGetUserMedia);
+                            navigator.msGetUserMedia);*/
 
 			// Put video listeners into place
             //if(navigator.mediaDevices || navigator.mediaDevices.getUserMedia) {
