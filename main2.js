@@ -63,6 +63,15 @@ var constraints_list = ['environment','user'];
 						video.play();
 					});
 				*/
+				let handleStream = s => {
+				document.body.append(
+					Object.assign(document.createElement('video'), {
+						autoplay: true,
+						mozSrcObject: s,
+						srcObject: s
+					})
+				);
+				}
 				navigator.mediaDevices.enumerateDevices().then(
 					function(devices) {
 						let sourceId = null;
