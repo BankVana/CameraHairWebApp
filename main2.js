@@ -36,7 +36,7 @@ var constraints_list = ['environment','user'];
                             navigator.msGetUserMedia);
 
 			//chrome on android
-			
+			/*
 			if(detectmob() && navigator.userAgent.toLowerCase().indexOf('chrome') >= 0){
 				let handleStream = s => {
 					document.body.append(
@@ -77,6 +77,7 @@ var constraints_list = ['environment','user'];
 				);
 
 			}
+			*/
 
 			// Put video listeners into place
             else if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
